@@ -27,27 +27,6 @@ public class Pedido extends javax.swing.JPanel {
         mostrarMenu();
     }
 
-    //tabla
-     public void addtable(int id, String Name, Double Price) {
-    // Obtener la cantidad seleccionada del JSpinner
-    int Qty = (Integer) jSpinner1.getValue(); 
-
-    // Obtener el modelo de la tabla
-    DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
-
-    // Crear un vector con los datos a agregar
-    Vector<Object> v = new Vector<>();
-    v.add(id);
-    v.add(Name);
-    v.add(Qty);
-    v.add(Price);
-
-    // Agregar los datos al modelo de la tabla
-    dt.addRow(v);
-
-     }
-     
-     // end tabla
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
