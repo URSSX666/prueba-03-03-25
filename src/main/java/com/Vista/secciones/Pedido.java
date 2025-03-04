@@ -823,6 +823,11 @@ public class Pedido extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.addRow(new Object[]{nombre, cantidad, unidad, total});
+        
+        jSpinner1.setValue(0);
+        
+        Cubierta1.setVisible(false);
+        PanelCubierta.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
