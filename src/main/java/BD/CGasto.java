@@ -1,4 +1,3 @@
-
 package BD;
 
 import com.toedter.calendar.JDateChooser;
@@ -49,7 +48,7 @@ public class CGasto {
             objetoConexion.cerrarConexion();
         }
         }
-    public void agregarGasto(JTextField producto, JTextField cantidad, newscomponents.RSDateChooser fecha, JTextField precio, JTextField descripcion, JComboBox comboproveedor){
+    public void agregarGasto(JTextField producto, JTextField cantidad, newscomponents.RSDateChooser fecha, JTextField precio, JTextField descripcion, JComboBox comboproveedor, JLabel jlPrecio){
         Database objetoconexion = new Database();
         String consulta = "insert into gasto (producto,cantidad,fecha,precio,descripcion,provedor_codigo) values (?,?,?,?,?,?);";
         try {
@@ -65,6 +64,7 @@ public class CGasto {
             cs.setInt(6, idProveedor);
             cs.execute();
             JOptionPane.showMessageDialog(null, "Se guardo correctamente");
+            updateTotalPrice(cantidad, precio, jlPrecio);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar"+e.toString());
         }
@@ -124,7 +124,7 @@ public class CGasto {
             }
         }
     }
-    public void modificarGasto(JTextField codigo,JTextField producto, JTextField cantidad, newscomponents.RSDateChooser fecha,JTextField precio, JTextField descripcion, JComboBox comboproveedor){
+    public void modificarGasto(JTextField codigo,JTextField producto, JTextField cantidad, newscomponents.RSDateChooser fecha,JTextField precio, JTextField descripcion, JComboBox comboproveedor, JLabel jlPrecio){
         Database objetoConexion = new Database();
         String consulta = "UPDATE gasto SET gasto.producto=?,gasto.cantidad=?,gasto.fecha=?,gasto.precio=?,"
                 + "gasto.descripcion=?,gasto.provedor_codigo=? WHERE gasto.codigo=?";
@@ -142,6 +142,7 @@ public class CGasto {
             cs.setInt(7, Integer.parseInt(codigo.getText()));
             cs.execute();
             JOptionPane.showMessageDialog(null, "Se modifico correctamente");
+            updateTotalPrice(cantidad, precio, jlPrecio);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se modifico correctamente"+e.toString());
         }
@@ -261,5 +262,16 @@ public class CGasto {
         fecha.setDate(calendario.getTime());
         precio.setText("");
         descripcion.setText("");
+    }
+
+    private void updateTotalPrice(JTextField cantidad, JTextField precio, JLabel jlPrecio) {
+        try {
+            int cantidadValue = Integer.parseInt(cantidad.getText());
+            float precioValue = Float.parseFloat(precio.getText());
+            float total = cantidadValue * precioValue;
+            jlPrecio.setText("Total Precio: " + total);
+        } catch (NumberFormatException e) {
+            jlPrecio.setText("Total Precio: 0.0");
+        }
     }
 }

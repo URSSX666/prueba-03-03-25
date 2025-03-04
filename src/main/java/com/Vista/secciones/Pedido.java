@@ -816,7 +816,18 @@ public class Pedido extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        String nombre = jlNombre.getText();
+        int cantidad = (int) jSpinner1.getValue();
+        String unidad = jComboBox1.getSelectedItem().toString();
+        double total = cantidad * 10.0; // Example calculation for total
+
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.addRow(new Object[]{nombre, cantidad, unidad, total});
+        
+        jSpinner1.setValue(0);
+        
+        Cubierta1.setVisible(false);
+        PanelCubierta.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

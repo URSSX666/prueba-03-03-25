@@ -66,6 +66,7 @@ public class Gastos extends javax.swing.JPanel {
         txtDescripcion = new RSMaterialComponent.RSTextFieldMaterial();
         txtCantidad = new RSMaterialComponent.RSTextFieldMaterial();
         cbProveedor = new RSMaterialComponent.RSComboBoxMaterial();
+        jlPrecio = new javax.swing.JLabel();
         Cubierta2 = new javax.swing.JPanel();
         PanelModificar = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -247,6 +248,10 @@ public class Gastos extends javax.swing.JPanel {
         cbProveedor.setColorMaterial(new java.awt.Color(58, 179, 28));
         cbProveedor.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
+        jlPrecio.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jlPrecio.setForeground(new java.awt.Color(51, 51, 51));
+        jlPrecio.setText("Total Precio: 0.0");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -288,6 +293,10 @@ public class Gastos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BotonSalir1)
                         .addGap(28, 28, 28))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jlPrecio)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +334,9 @@ public class Gastos extends javax.swing.JPanel {
                     .addComponent(btnGuardarGasto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jlPrecio)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout Cubierta1Layout = new javax.swing.GroupLayout(Cubierta1);
@@ -915,6 +926,7 @@ public class Gastos extends javax.swing.JPanel {
         objetoGasto.agregarGasto(txtProducto, txtCantidad, dtFecha1, txtPrecio, txtDescripcion, cbProveedor);
         objetoGasto.mostrarGasto(jtGasto);
         desabilitarformulario();
+        updateTotalPrice();
     }//GEN-LAST:event_btnGuardarGastoActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -947,10 +959,22 @@ public class Gastos extends javax.swing.JPanel {
         objetoGasto.mostrarGasto(jtGasto);
         desabilitarformulario();
         objetoGasto.limpiarFormulario(txtProducto1, txtCantidad1, dtFecha1, txtPrecio1, txtDescripcion1, cbProveedor1);
+        updateTotalPrice();
     }//GEN-LAST:event_btnGuardarModificacionActionPerformed
  
     public void desabilitarformulario(){
         PanelCubierta.setVisible(false);
+    }
+
+    private void updateTotalPrice() {
+        try {
+            int cantidad = Integer.parseInt(txtCantidad.getText());
+            float precio = Float.parseFloat(txtPrecio.getText());
+            float total = cantidad * precio;
+            jlPrecio.setText("Total Precio: " + total);
+        } catch (NumberFormatException e) {
+            jlPrecio.setText("Total Precio: 0.0");
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1011,6 +1035,7 @@ public class Gastos extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jtGasto;
+    private javax.swing.JLabel jlPrecio;
     private RSMaterialComponent.RSTextFieldMaterial txtCantidad;
     private RSMaterialComponent.RSTextFieldMaterial txtCantidad1;
     private RSMaterialComponent.RSTextFieldMaterial txtCodigo;
